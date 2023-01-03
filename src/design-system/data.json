@@ -1,0 +1,41 @@
+
+{
+    "client": [
+        {
+            "name": "redshift",
+            "id": "1",
+            "style": {
+            "colour": [
+                    { "colourName" : "primary colour" ,
+                      "colorCode": "#fff"
+                    }
+                ],
+            "typography": {
+                "Heading": {
+                    "fontName": {
+                        "value": "Roboto-SemiBold"
+                    },
+                    "size": {
+                        "value": 16
+                    },
+                    "transform": {
+                        "value": "none"
+                    },
+                    "decoration": {
+                        "value": "none"
+                    },
+                    "letterSpacing": {
+                        "value": 0,
+                        "unit": "PERCENT"
+                    },
+                    "lineHeight": {
+                        "value": "1",
+                        "unit": "PIXELS"
+                    }
+                }
+            }
+        }
+        }
+        
+    ]
+}
