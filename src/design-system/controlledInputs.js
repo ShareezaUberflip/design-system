@@ -1,6 +1,6 @@
 import {React } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
-import { Input } from "../design-system/formFields"
+import { Input, Selection } from "../design-system/formFields"
 
 
 
@@ -35,12 +35,13 @@ const ControlledInputs = () => {
 
 
   const ColorSetting = ()=> {
+    const colourNames = ['Primary', 'Secondary', 'Neutral', 'Warning', 'Success', 'Error', 'LinkColour']
     return (
       <>
       {colorFields.map((item, index) => (
         <fieldset key={item.id} className='border-solid border-2 border-gray-900 py-3 px-3 mb-7 mt-7'>
           <Controller
-            render={({ field, ref}) => <Input {...field} name='colourName' label='Colour Name:' id='colourName' type='textfield' placeholder='colour name' ref={ref}  />}
+            render={({ field, ref}) => <Selection {...field} name='colourName' label='Colour Name:' id='colourName' arrayOfData={colourNames} ref={ref}  />}
             name={`style.colour.${index}.colourName`}
             control={control}
             defaultValue = ''
@@ -69,13 +70,15 @@ const ControlledInputs = () => {
 
 
   const TypographySetting = ()=> {
+    const textDecorationOptions = ['underline', 'none'];
+    const typographyNames = ['Heading1', 'Heading2', 'Heading3', 'Heading4', 'Heading5', 'Heading6', 'Link', 'Blockquoute', 'Paragraph', 'Figcaption'];
     return (
       <>
       {typoFields.map((item, index) => (
         <fieldset key={item.id} className='border-solid border-2 border-gray-900 py-3 px-3 mb-7 mt-7'>
           <Controller
-            render={({ field, ref}) => <Input {...field} name='typoName' label='Typography Name:' id='typoName' type='textfield' placeholder='Typography name' ref={ref}  />}
-            name={`style.typography.${index}.name`}
+            render={({ field, ref}) => <Selection {...field} name='typoName' label='Typography Name:' id='typeName' arrayOfData={typographyNames} ref={ref}  />}
+            name={`style.colour.${index}.colourName`}
             control={control}
             defaultValue = ''
            />
@@ -86,8 +89,14 @@ const ControlledInputs = () => {
             defaultValue = ''
            />
           <Controller
-            render={({ field, ref }) => <Input {...field} name='fontSize' label='Font Size:' id='fontSize' type='textfield' ref={ref}  />}
+            render={({ field, ref }) => <Input {...field} name='fontSize' label='Font Size:' id='fontSize' type='number' ref={ref}  />}
             name={`style.typography.${index}.font-size`}
+            control={control}
+            defaultValue = ''
+           />
+            <Controller
+            render={({ field, ref }) => <Selection {...field} name='textDecoration' label='Text Decoration:' id='textDecoration' arrayOfData={textDecorationOptions} ref={ref}  />}
+            name={`style.typography.${index}.text-decoration`}
             control={control}
             defaultValue = ''
            />
@@ -109,7 +118,7 @@ const ControlledInputs = () => {
  
   return (
     <form className='grid grid-cols-1 gap-6 mt-8 max-w-md' onSubmit={handleSubmit(data => HandleFormSubmission(data))}>
-      <div>
+      <div className='md:absolute' style={{left:'200px'}}>
       <Controller
               render={({ field, ref }) => <Input {...field} name="clientName" label="Client:" id='clientName' type='textfield' placeholder='client' ref={ref}/>}
               name={`clientName`}
@@ -120,7 +129,7 @@ const ControlledInputs = () => {
        <TypographySetting/>
      
       </div>
-      <input className='bg-pink-500 hover:bg-pink-400 w-full text-white mx-auto rounded-sm py-2 px-4 ' type="submit" value="Create Style" />
+      <input className='bg-pink-500 hover:bg-pink-400  md:w-30 md:fixed md:left-10  text-white mx-auto rounded-sm py-2 px-4 ' type="submit" value="Create Style" />
     </form>
   );
 }
